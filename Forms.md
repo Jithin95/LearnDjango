@@ -20,3 +20,13 @@
     </body>
 </html>
 ```
+
+> views.py
+
+```python
+def index(request):
+    if request.method == 'POST':
+        return render(request, 'contact/index.html', {'val':request.POST['username']})
+    else:
+        return render(request, 'contact/index.html', {'val':'notget'})
+```
