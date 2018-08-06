@@ -120,3 +120,18 @@ urlpatterns = [
 ```
 
 More fields [Django Form Field](https://docs.djangoproject.com/en/2.1/topics/forms/#looping-over-the-form-s-fields).
+
+### Adding Style classes for forms
+
+> forms.py
+
+```python
+
+class FormView(forms.Form):
+    context_styles = {
+        'class': 'input_field',
+        'placeholder': 'Enter Your name'
+    }
+    username = forms.CharField(label = "Name:", required = True, max_length=120, widget=forms.TextInput(attrs = context_styles))
+
+```
