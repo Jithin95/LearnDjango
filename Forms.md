@@ -135,3 +135,35 @@ class FormView(forms.Form):
     username = forms.CharField(label = "Name:", required = True, max_length=120, widget=forms.TextInput(attrs = context_styles))
 
 ```
+
+### Custom Error checking
+
+it check errors on calling form.is_valid()
+
+> forms.py
+
+```python
+
+class FormView(forms.Form):
+    context_styles = {
+        'class': 'input_field',
+        'placeholder': 'Enter Your name'
+    }
+    username = forms.CharField(label = "Name:", required = True, max_length=120, widget=forms.TextInput(attrs = context_styles))
+
+    # For checking whole form items
+    def clean(self):
+        username = self.cleaned_data['username']
+        if len(username) < 100:
+            raise forms.ValidationError("you can't go below 100", code="field1",)
+        return  self.cleaned_data
+
+    # If we want to check each field items
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) < 5:
+            raise forms.ValidationError("Less than 5", code="username5",)
+        return  username
+
+
+```
