@@ -60,7 +60,7 @@ class NameView(TemplateView):
         form = NameForm(request.POST)
         if form.is_valid():
             yourname = form.cleaned_data['yourName']
-            
+
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
         else: # when some error on the field including custom
@@ -90,3 +90,33 @@ urlpatterns = [
 </body>
 
 ```
+
+> Output
+
+```html
+<form action="/contact/" method="post">    
+    <label for="name">Your Name:</label>
+    <input type="text" name="yourName" id="name"/>
+    <input type="submit" value="Submit"/>
+</form>
+```
+
+### Rendering fields manually
+
+> templates/contact/nameform.html
+
+```html
+<body>
+    <form action="{% url 'nameview' %}" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.yourName.errors }}
+        <label for="{{ form.yourName.id_for_label }}">{{ form.label_tag }}</label>
+        {{ form.yourName }}
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+
+```
+
+More fields [Django Form Field](https://docs.djangoproject.com/en/2.1/topics/forms/#looping-over-the-form-s-fields).
