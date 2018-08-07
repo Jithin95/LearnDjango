@@ -151,7 +151,7 @@ class FormView(forms.Form):
     }
     username = forms.CharField(label = "Name:", required = True, max_length=120, widget=forms.TextInput(attrs = context_styles))
 
-    # For checking whole form items
+    # For checking whole form items non_field_errors
     def clean(self):
         username = self.cleaned_data['username']
         if len(username) < 100:
