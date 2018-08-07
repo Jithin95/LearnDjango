@@ -51,7 +51,7 @@ And here’s an example of how that filter would be used:
 ```html
 
 {% load poll_extras %}
-<!-- input\methodname -->
+<!-- input&#124;methodname -->
 {% if form.gender|is_radio %}
     <p>Success</p>
 {% endif %}
