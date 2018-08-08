@@ -167,3 +167,48 @@ class FormView(forms.Form):
 
 
 ```
+
+### Image Field
+
+> project/settings.py
+
+```python
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+```
+
+> project/urls.py
+
+```python
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+> app/models.py
+
+```python
+image = models.ImageField(upload_to='documents/', blank = True)
+```
+> app/forms.py
+
+```python
+image = models.ImageField()
+```
+
+> app/views.py
+
+```python
+
+def post(self, request):
+    form = FormView(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+        # redirect to a new URL:
+        return HttpResponseRedirect('/thanks/')
+    else :
+        print ("Failed validation")
+
+    return render(request, self.template_name, {'form': form1})
+```
