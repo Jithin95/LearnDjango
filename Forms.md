@@ -189,7 +189,7 @@ if settings.DEBUG:
 > app/models.py
 
 ```python
-image = models.ImageField(upload_to='documents/', blank = True)
+image = models.ImageField(upload_to='documents/', blank = True, null = True)
 ```
 > app/forms.py
 
